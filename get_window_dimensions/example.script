@@ -1,0 +1,24 @@
+﻿require "main.common"
+
+function init(self)
+	local d = get_dimensions()
+	print("show from init " .. d.width .. " " .. d.height)
+	msg.post("@render:", "get_dimensions")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("window_dimensions") then
+     	print(message.width .. " " .. message.height)
+  	end
+end
+
+-- check sides of screen
+function on_input(self, action_id, action)
+     if action_id == hash("touch") and action.pressed then
+         if action.x > tonumber(get_dimensions().width) / 2 then
+             -- right
+         else
+             -- left
+         end
+     end
+end
